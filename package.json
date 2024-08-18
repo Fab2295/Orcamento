@@ -1,0 +1,57 @@
+{
+  "name": "meu-apartamento",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^8",
+    "@sap/hdi-deploy": "^5.2.1",
+    "@sap/xssec": "^4",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.6",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8.1.2"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "[development]": {
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": "sqlite.db"
+          }
+        },
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "Admin": {
+              "password": "Admin@123",
+              "roles": [
+                "Admin"
+              ]
+            },
+            "Viewer": {
+              "password": "Viewer",
+              "roles": [
+                "Viewer"
+              ]
+            }
+          }
+        }
+      },
+      "[production]": {
+        "db": "hana",
+        "auth": {
+          "kind": "xsuaa"
+        }
+      }
+    }
+  }
+}
